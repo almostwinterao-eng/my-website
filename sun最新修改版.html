@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Mr. Sun Character Page</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 0;
+      background: #fff8e1;
+      color: #D2691E; /* 文字颜色 */
+    }
+
+    .container {
+      padding: 20px;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .back-btn {
+      text-decoration: none;
+      background: #FF8C00; /* 边框颜色 */
+      color: white;
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-weight: bold;
+      display: inline-block;
+      margin-bottom: 20px;
+      cursor: pointer;
+    }
+
+    /* 顶部三形态介绍板块 */
+    .main-forms {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      border: 3px solid #FF8C00; /* 边框颜色 */
+      padding: 16px;
+      border-radius: 12px;
+      margin-bottom: 30px;
+      background-color: rgb(255,255,0); /* WEBP RGB颜色值背景 */
+    }
+    .forms-images {
+      display: flex;
+      gap: 20px;
+      flex-shrink: 0;
+    }
+    .forms-images .form-img {
+      border: 4px solid #FF8C00; /* 图片边框颜色 */
+      border-radius: 12px;
+      width: 120px;
+      height: 120px;
+      object-fit: cover;
+      background-color: white;
+    }
+    .forms-descriptions {
+      flex-grow: 1;
+      color: #D2691E; /* 文字颜色 */
+      font-size: 14px;
+      line-height: 1.5;
+    }
+    .forms-descriptions h3 {
+      margin: 0 0 12px 0;
+      font-weight: bold;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .forms-descriptions h3 img {
+      width: 28px;
+      height: 28px;
+    }
+
+    /* 人物关系区域 */
+    .relation-area {
+      display: flex;
+      gap: 20px;
+      margin-bottom: 40px;
+    }
+    .relation-graph-embed {
+      flex: 3;
+      border: 2px dashed #FF8C00; /* 边框颜色 */
+      border-radius: 12px;
+      height: 400px;
+      overflow: hidden;
+    }
+    .relation-graph-embed iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+    
+    /* More Characters 改为头像+文字分离横排带动效 */
+    .more-characters {
+      flex: 1;
+      padding-left: 20px;
+      color: #D2691E;
+    }
+    .more-characters h3 {
+      margin-top: 0;
+      margin-bottom: 15px;
+    }
+    .character-link {
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+      text-decoration: none;
+      color: #D2691E;
+      border-radius: 8px;
+      padding: 6px;
+      transition: background-color 0.3s, transform 0.2s;
+      cursor: pointer;
+    }
+    .character-link:hover {
+      background-color: #FFF3CD;
+      transform: scale(1.05);
+      color: #FF8C00;
+    }
+    .character-avatar {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      border: 2px solid #aaa;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    .character-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s;
+    }
+    .character-link:hover .character-avatar img {
+      transform: scale(1.1);
+    }
+    .character-name {
+      margin-left: 12px;
+      font-weight: bold;
+      font-size: 1rem;
+      white-space: nowrap;
+    }
+
+    /* 三个阶段 视频两行四列排列 */
+    .phases {
+      margin-bottom: 40px;
+    }
+    .phases h2 {
+      margin-bottom: 20px;
+      color: #D2691E;
+    }
+    .phase-items-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: repeat(2, auto);
+      gap: 20px;
+    }
+    .phase-item {
+      background: #fff;
+      padding: 10px;
+      border-radius: 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-weight: bold;
+      color: #D2691E;
+    }
+    .phase-item video,
+    .phase-item img {
+      width: 100%;
+      height: 140px;
+      border-radius: 8px;
+      object-fit: cover;
+      background: #ccc;
+      margin-top: 8px;
+    }
+
+    /* 推荐游戏 2行4列8个游戏 */
+    .games-section {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-auto-rows: 180px;
+      gap: 16px;
+      margin-bottom: 40px;
+    }
+    .game-box {
+      background: #fff;
+      border: 2px solid #FF8C00;
+      border-radius: 12px;
+      box-shadow: 0 2px 6px rgba(255, 140, 0, 0.4);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: bold;
+      color: #D2691E;
+      font-size: 14px;
+      user-select: none;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background-color 0.3s, color 0.3s, transform 0.2s;
+    }
+    .game-box:hover {
+      background-color: #FFF3CD;
+      color: #FF8C00;
+      transform: scale(1.05);
+    }
+
+    /* 响应式小屏 */
+    @media (max-width: 900px) {
+      .main-forms {
+        flex-direction: column;
+        align-items: center;
+      }
+      .forms-descriptions {
+        text-align: center;
+        margin-top: 16px;
+      }
+      .relation-area {
+        flex-direction: column;
+      }
+      .phase-items-grid {
+        grid-template-columns: 1fr 1fr;
+        grid-auto-rows: auto;
+      }
+      .games-section {
+        grid-template-columns: repeat(2, 1fr);
+        grid-auto-rows: 160px;
+      }
+    }
+    @media (max-width: 500px) {
+      .games-section {
+        grid-template-columns: 1fr;
+        grid-auto-rows: 140px;
+      }
+      .phase-items-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a href="#" class="back-btn">← Back</a>
+
+    <!-- 顶部三形态介绍 -->
+    <div class="main-forms">
+      <div class="forms-images">
+        <img class="form-img" src="https://cdn.sprunki.com/img/sprunki-mr-sun.webp" alt="Mr. Sun Normal" title="Normal Form"/>
+        <img class="form-img" src="https://cdn.sprunki.com/img/sprunki-mr-sun-horror.webp" alt="Mr. Sun Horror" title="Horror Form"/>
+        <img class="form-img" src="https://cdn.sprunki.com/img/mr-sun-phase-3.webp" alt="Mr. Sun Phase 3" title="Phase 3 Form"/>
+      </div>
+      <div class="forms-descriptions">
+        <h3>
+          <img src="https://static.wikia.nocookie.net/incredibox-sprunki/images/1/16/MrSunIconSvg.svg" alt="Mr. Sun Icon" />
+          Mr. Sun
+        </h3>
+        <p>Mr. Sun is the radiant entity bringing warmth and power to the Sprunki world.</p>
+        <p>Normal form is calm and inviting, horror form is fierce and intimidating, while phase 3 showcases his ultimate power visually.</p>
+      </div>
+    </div>
+
+    <!-- 人物关系图区域替换为嵌入本地文件 -->
+    <div class="relation-area">
+      <div class="relation-graph-embed">
+        <iframe src="file:///C:/Users/Admin/Desktop/角色卡修改/角色关系预览图2.html" title="Character Relations"></iframe>
+      </div>
+      <div class="more-characters">
+        <h3>More Characters</h3>
+        <a href="#" class="character-link">
+          <div class="character-avatar"><img src="https://placehold.co/60x60?text=Durple" alt="Durple"></div>
+          <div class="character-name">Durple</div>
+        </a>
+        <a href="#" class="character-link">
+          <div class="character-avatar"><img src="https://placehold.co/60x60?text=Tree" alt="Mr. Tree"></div>
+          <div class="character-name">Mr. Tree</div>
+        </a>
+        <a href="#" class="character-link">
+          <div class="character-avatar"><img src="https://placehold.co/60x60?text=Simon" alt="Simon"></div>
+          <div class="character-name">Simon</div>
+        </a>
+        <a href="#" class="character-link">
+          <div class="character-avatar"><img src="https://placehold.co/60x60?text=Tunner" alt="Tunner"></div>
+          <div class="character-name">Tunner</div>
+        </a>
+      </div>
+    </div>
+
+    <!-- 三个阶段 + 视频 两行四列布局 -->
+    <div class="phases">
+      <h2>Character Phases</h2>
+      <div class="phase-items-grid">
+        <div class="phase-item">
+          <strong>Phase 1</strong>
+          <video controls poster="https://cdn.sprunki.com/img/sprunki-mr-sun.webp" >
+            <source src="video1.mp4" type="video/mp4" />
+            Your browser does not support video.
+          </video>
+        </div>
+        <div class="phase-item">
+          <strong>Phase 2</strong>
+          <video controls poster="https://cdn.sprunki.com/img/sprunki-mr-sun-horror.webp" >
+            <source src="video2.mp4" type="video/mp4" />
+            Your browser does not support video.
+          </video>
+        </div>
+        <div class="phase-item">
+          <strong>Phase 3</strong>
+          <video controls poster="https://cdn.sprunki.com/img/mr-sun-phase-3.webp" >
+            <source src="video3.mp4" type="video/mp4" />
+            Your browser does not support video.
+          </video>
+        </div>
+        <div class="phase-item">
+          <strong>Phase 4</strong>
+          <video controls poster="https://placehold.co/240x140?text=Phase+4" >
+            <source src="video4.mp4" type="video/mp4" />
+            Your browser does not support video.
+          </video>
+        </div>
+        <div class="phase-item">
+          <strong>Phase 5</strong>
+          <video controls poster="https://placehold.co/240x140?text=Phase+5" >
+            <source src="video5.mp4" type="video/mp4" />
+            Your browser does not support video.
+          </video>
+        </div>
+        <div class="phase-item">
+          <strong>Phase 5</strong>
+          <video controls poster="https://placehold.co/240x140?text=Phase+5" >
+            <source src="video5.mp4" type="video/mp4" />
+            Your browser does not support video.
+          </video>
+        </div>
+        <div class="phase-item">
+          <strong>Phase 5</strong>
+          <video controls poster="https://placehold.co/240x140?text=Phase+5" >
+            <source src="video5.mp4" type="video/mp4" />
+            Your browser does not support video.
+          </video>
+        </div>
+        <div class="phase-item">
+          <strong>Phase 5</strong>
+          <video controls poster="https://placehold.co/240x140?text=Phase+5" >
+            <source src="video5.mp4" type="video/mp4" />
+            Your browser does not support video.
+          </video>
+        </div>
+      </div>
+    </div>
+
+    <!-- 推荐游戏 2行4列8个游戏 -->
+    <div class="section">
+      <h2 style="color:#D2691E; margin-bottom: 16px;">Recommended Games</h2>
+      <div class="games-section">
+        <a href="https://sprunki.com/sprunki-all-sun" target="_blank" class="game-box">Game 1 Preview</a>
+        <a href="https://sprunki.com/sprunki-all-sun" target="_blank" class="game-box">Game 2 Preview</a>
+        <a href="https://sprunki.com/sprunki-all-sun" target="_blank" class="game-box">Game 3 Preview</a>
+        <a href="https://sprunki.com/sprunki-all-sun" target="_blank" class="game-box">Game 4 Preview</a>
+        <a href="https://sprunki.com/sprunki-all-sun" target="_blank" class="game-box">Game 5 Preview</a>
+        <a href="https://sprunki.com/sprunki-all-sun" target="_blank" class="game-box">Game 6 Preview</a>
+        <a href="https://sprunki.com/sprunki-all-sun" target="_blank" class="game-box">Game 7 Preview</a>
+        <a href="https://sprunki.com/sprunki-all-sun" target="_blank" class="game-box">Game 8 Preview</a>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>
